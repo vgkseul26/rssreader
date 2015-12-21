@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="D:\Android\RSSReader\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="D:\Android\RSSReader\app\build\intermediates\pre-dexed\debug\classes-f9a792049bff1c3b21bdc02b0298dca8f9098940.jar" />
+    </item>
+    <item
+        jar="D:\Android\RSSReader\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="D:\Android\RSSReader\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.1-f9825efdb479f9c3b889e1747591668c5601f23c.jar" />
+    </item>
+    <item
+        jar="D:\Android\RSSReader\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="D:\Android\RSSReader\app\build\intermediates\pre-dexed\debug\classes-8209b306a0cdb2bcca7a2ef5ed5807dae4ad0625.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ser\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="D:\Android\RSSReader\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.1-d31c1f3802ade09eca03404a3f7e28d0e9f3934e.jar" />
+    </item>
+
+</items>
