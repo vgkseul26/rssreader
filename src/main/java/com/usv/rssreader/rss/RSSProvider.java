@@ -18,8 +18,8 @@ public class RSSProvider extends ContentProvider {
     static final String DB_NAME = "rss";
     static final int DB_VERSION = 2;
 
-    static final String RSS_TABLE = "rss_lists";
-    static final String RSS_ID = "_id";
+    static final String RSS_TABLE = "rss_list";
+    static final String RSS_ID = "id";
     static final String RSS_TITLE = "title";
     static final String RSS_DESCRIPTION = "description";
     static final String RSS_LINK = "link";
@@ -28,7 +28,7 @@ public class RSSProvider extends ContentProvider {
             + RSS_ID + " integer primary key autoincrement, "
             + RSS_TITLE + " text, " + RSS_DESCRIPTION + " text, " + RSS_LINK + " text" + ");";
     static final String AUTHORITY = "com.usv.rssreader.provider.RSSRepository";
-    static final String RSS_PATH = "rss_lists";
+    static final String RSS_PATH = "rss_list";
     public static final Uri RSS_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + RSS_PATH);
     static final String RSS_CONTENT_TYPE = "vnd.android.cursor.dir/vnd." + AUTHORITY + "." + RSS_PATH;
     static final String RSS_CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd." + AUTHORITY + "." + RSS_PATH;
@@ -87,8 +87,9 @@ public class RSSProvider extends ContentProvider {
     @Override
     public Uri insert(Uri uri, ContentValues values) {
         Log.d(LOG, "insert, " + uri.toString());
-        if (uriMatcher.match(uri) != URI_RSS)
+        if (uriMatcher.match(uri) != URI_RSS) {
             throw new IllegalArgumentException("Wrong URI: " + uri);
+        }
 
         db = dbHelper.getWritableDatabase();
         long rowID = db.insert(RSS_TABLE, null, values);

@@ -8,13 +8,12 @@ import android.net.Uri;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
-
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class RSSService extends Service {
-    ExecutorService es;
+    ExecutorService executorService;
     final String LOG = "myLogs";
 
     public RSSService() {
@@ -32,7 +31,7 @@ public class RSSService extends Service {
         Log.d(LOG, "Service created");
         Toast.makeText(this, "Служба создана", Toast.LENGTH_SHORT).show();
         super.onCreate();
-        es = Executors.newFixedThreadPool(2);
+        executorService = Executors.newFixedThreadPool(2);
     }
 
     @Override
@@ -40,8 +39,8 @@ public class RSSService extends Service {
     {
         Toast.makeText(this, "Getting RSS feed", Toast.LENGTH_SHORT).show();
         Log.d(LOG, "Service started");
-       final  PendingIntent pi = intent.getParcelableExtra(MainActivity.PARAM_PINTENT);
-        es.submit(new Loader(pi));
+        PendingIntent pendingIntent = intent.getParcelableExtra(MainActivity.PARAM_PINTENT);
+        executorService.submit(new Loader(pendingIntent));
         return Service.START_STICKY;
     }
 
@@ -56,15 +55,16 @@ public class RSSService extends Service {
 
     public class Loader implements Runnable{
 
-        PendingIntent pi;
+        PendingIntent pendingIntent;
 
-        public Loader(PendingIntent pi){
-            this.pi = pi;
+        public Loader(PendingIntent pendingIntent){
+            this.pendingIntent = pendingIntent;
         }
         @Override
         public void run() {
             Log.d(LOG, "Thread runned");
             List<RSSNote> netWork = new Network().getRSSList("http://news.sportbox.ru/taxonomy/term/7212/0/feed");
+            getContentResolver().delete(MainActivity.RSS_URI, null, null);
             for (RSSNote rss : netWork) {
                 ContentValues values = new ContentValues();
                 values.put(RSSProvider.RSS_TITLE, rss.getTitle());
@@ -74,7 +74,8 @@ public class RSSService extends Service {
                 Log.d(LOG, uri.toString());
             }
             try {
-                pi.send(RSSService.this, MainActivity.INSERT_RSS, new Intent(RSSService.this, RSSService.class));
+
+                pendingIntent.send(RSSService.this, MainActivity.RESULT_OK, new Intent(RSSService.this, RSSService.class));
             } catch (PendingIntent.CanceledException ex) {
 
             }
